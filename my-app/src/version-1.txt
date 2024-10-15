@@ -1,0 +1,118 @@
+App js:
+
+
+import './App.css';
+import {useEffect, useState} from 'react'
+import './App.css'
+
+
+
+
+function App() {
+
+  let [form,setForm] = useState({})  
+  let [data, setdata] = useState({})
+  let [users, setUsers] = useState([])
+
+  
+
+  const handleForm = (e) => {
+    setForm({
+      ...form ,
+      [e.target.name] : e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+   let res = await fetch('http://localhost:8080/user',{
+    method : 'POST',
+    body : JSON.stringify(form),
+    headers : {
+      'Content-Type':'application/json'
+    }
+   })
+   let data = await res.json()
+   setdata(data)
+  }
+
+
+  let getUsers = async () => {
+    let res = await fetch('http://localhost:8080/user', {
+      method : 'GET'
+    })
+    let data = await res.json()
+    setUsers(data)
+  }
+  useEffect( () => {
+    getUsers()
+
+  }, [data])
+
+
+
+
+  return (
+    <div className="App">
+      {data.username && <p>user {data.username} is saved in database successfully</p>}
+
+      <form onSubmit={handleSubmit}>
+        <span>Username</span>
+        <input type='text' name="username" onChange={handleForm}></input>
+
+        <span>Password</span>
+        <input type='text' name="password" onChange={handleForm}></input>
+        
+        <input type='submit'></input>
+      </form>
+
+      <div className='showUsers'>
+          <h2>Users : </h2>
+          <ul>
+            {users.map(user => <li key={user._id}>{user.username}</li>)}
+          </ul>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+export default App;
+
+
+
+
+
+
+css : 
+.App {
+    text-align: center;
+  }
+  
+  .showUsers ul{
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 11px;
+    max-width: 40vw;
+    margin: auto;
+    text-align: center;
+    padding: 4px;
+  }
+  
+  .showUsers ul li{
+    background-color: white;
+    border-radius: 11px;
+    margin: 10px 5px;
+    list-style: none;
+    padding: 2px;
+    transition: scale 500ms;
+  }
+  
+  .showUsers ul li:hover{
+    scale: 1.05;
+  }
+  
+  
+  

@@ -1,0 +1,62 @@
+index.js :
+
+let express = require('express')
+let cors = require('cors')
+let bodyParser = require('body-parser')
+let mongoose = require('mongoose')
+
+let server = express()
+
+//DB Connection
+async function dbConnect() {
+    await mongoose.connect('mongodb://localhost:27017/reactConnect')
+    console.log('db connected')
+} 
+dbConnect().catch(err => console.log(err))
+
+
+//Schema
+let userSchema = mongoose.Schema({
+    username : String,
+    password : String
+})
+
+
+//Model
+let User = mongoose.model("User",userSchema)
+
+
+
+//Server initialization
+server.listen(8080, () => {
+    console.log('server started')
+})
+
+
+//Middlewares
+server.use(cors())
+server.use(bodyParser.json())  //to use req.bosy and extract json
+
+
+// HTTP Methods
+server.post('/user', async (req,res) => {
+    console.log(req.body)
+    let doc = User.create({
+        username : req.body.username,
+        password : req.body.password
+    })
+
+    let data = await User.find()
+    res.json(data[data.length-1])
+})
+
+
+server.get('/user', async (req,res) => {
+    let users = await User.find()
+    console.log('get response sent')
+    res.json(users)
+})
+
+
+
+

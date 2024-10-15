@@ -1,0 +1,47 @@
+1.   Form created, form data to form object using useState
+
+2.send form data to server using POST fetch
+
+3.in server 
+.receive the data in post method, set the data in database and send the recent 'document' to client(react) from database
+
+4.in react 
+.receive the POST response, process it and display the username along with some other text inside <p> tag.
+
+
+
+
+
+
+
+
+
+
+react --(curd request) --> express server --(curd operations perform on database)--> express server send data/message to react  
+
+
+
+to use react website and express backed with same express server:
+    use npm run build to convert whole react frontend into static files (index.html is the main file and js;css static files are in their respective folder created by build)
+    host the index.html file in express by using server.use(express.static(--build foler containing the index.html file)) 
+if any react related request (like going to /about route) comes from client, the request goes to express server then the express returns the index.html file (which is the main built react app) and,
+this index.html handles the react related request/response.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+new thing learned : 
+    1. useState is async function
+    2. e.target returns the corresponding DOM element
+    3. react build creates static files in which index.html represents the whole website 
