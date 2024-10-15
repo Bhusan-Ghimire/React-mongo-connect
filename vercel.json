@@ -10,5 +10,5 @@
             "src": "/(.*)",
             "dest": "node-server/index.js"
         }
-    
+    ]
 }
