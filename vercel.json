@@ -7,13 +7,8 @@
     ],
     "rewrites": [
         {
-<<<<<<< HEAD
             "src": "/(.*)",
             "dest": "/node-server"
-=======
-            "source": "/(.*)",
-            "destination": "/node-server"
->>>>>>> 06e7c1e5a09e595c6125b494f0cbd49c4f143262
         }
     ]
 }
