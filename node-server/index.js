@@ -66,10 +66,7 @@ server.delete('/user/:_id', async (req,res) => {
 })
 
 
-// Wildcard route should be defined last of other routes otherwise it'll overtake them
-server.use('*', (req,res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'))
-})
+
 
 
 
