@@ -8,7 +8,7 @@
     "rewrites": [
         {
             "src": "/(.*)",
-            "dest": "/node-server"
+            "dest": "/"
         }
     ]
 }
