@@ -1,14 +1,14 @@
 {
     "builds": [
         {
-            "src":"index.js",
+            "source":"index.js",
             "use":"@vercel/node"
         }
     ],
     "rewrites": [
         {
-            "src": "/(.*)",
-            "dest": "/"
+            "source": "/(.*)",
+            "destination": "/"
         }
     ]
 }
